@@ -186,9 +186,9 @@
 
   .app__social {
     position: fixed; /* Ensure it's fixed */
-    bottom:0.25rem;
+    bottom:1rem;
     left: 1rem;
-    top: 82%; /* Prevent top override */
+    top: auto; /* Prevent top override */
     flex-direction: row;
     padding: 0;
     z-index: 10; /* Keep it above other elements */
