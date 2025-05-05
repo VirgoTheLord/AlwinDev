@@ -26,7 +26,7 @@ const images = {
   about04: require("../assets/about04.png"),
   profile: require("../assets/alwin123.png"),
   circle,
-  logo: require("../assets/alwinsvg1.png"),
+  logo: require("../assets/asvg.png"),
   adidas: require("../assets/adidas.png"),
   amazon: require("../assets/amazon.png"),
   asus: require("../assets/asus.png"),

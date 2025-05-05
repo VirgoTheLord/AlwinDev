@@ -14,7 +14,6 @@
 .app__container {
   width: 100%;
   min-height: 100vh;
-
   display: flex;
   flex-direction: row;
 }
@@ -39,7 +38,6 @@
 .copyright {
   width: 100%;
   padding: 2rem 0 0;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -98,11 +96,10 @@
 }
 
 .app__social {
-  position: fixed; // Fix it relative to the viewport
-  top: 75%;        // 90% from top of the screen
-  left: 1rem;      // Place it on the left side
+  position: fixed;
+  top: 75%;
+  left: 0.25rem;
   z-index: 10;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,7 +113,6 @@
     background-color: var(--white-color);
     margin: 0.25rem 0;
     border: 1px solid var(--lightGray-color);
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,13 +146,12 @@
   }
 }
 
-
+/* Hide social and nav only on mobile — we'll override that below */
 .app__navigation {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   padding: 1rem;
 
   .app__navigation-dot {
@@ -165,7 +160,6 @@
     border-radius: 50%;
     background-color: #9aaddd;
     margin: 0.5rem;
-
     transition: background-color 0.2s ease-in-out;
 
     &:hover {
@@ -179,14 +173,48 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+/* NEW — Hide only on first page */
+.app__social--hidden {
+  display: none !important;
+}
 
-  .app__navigation,
-  .app__social {
+/* NEW — Mobile specific layout for .app__social */
+@media screen and (max-width: 500px) {
+  .app__navigation {
     display: none;
+  }
+
+  .app__social {
+    position: fixed; /* Ensure it's fixed */
+    bottom:0.25rem;
+    left: 1rem;
+    top: 82%; /* Prevent top override */
+    flex-direction: row;
+    padding: 0;
+    z-index: 10; /* Keep it above other elements */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .app__social div {
+    margin: 0 0.25rem;
+  }
+
+  .app__social.hide-social {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .app__social.show-social {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .copyright {
     padding: 2rem;
   }
 }
+
+
+
