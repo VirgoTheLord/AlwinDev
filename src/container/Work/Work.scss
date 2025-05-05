@@ -7,7 +7,7 @@
 .app__work-filter {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-center;
   align-items: center;
   flex-wrap: wrap;
 
@@ -165,3 +165,27 @@
     top: -25px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .app__work-filter {
+    justify-content: center !important;
+    text-align: center;
+  }
+
+  .app__works {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app__work-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .app__work-item {
+    margin: 1rem auto;
+  }
+}
+
