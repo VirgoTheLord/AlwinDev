@@ -14,7 +14,7 @@ const Footer = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { username, email, message } = formData;
+  const { name, email, message } = formData;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -22,22 +22,32 @@ const Footer = () => {
   };
 
   const handleSubmit = () => {
+    if (!name || !email || !message) {
+      alert("Please fill all fields.");
+      return;
+    }
+
     setLoading(true);
 
     const contact = {
       _type: "contact",
-      name: formData.username,
-      email: formData.email,
-      message: formData.message,
+      name,
+      email,
+      message,
     };
 
     client
       .create(contact)
       .then(() => {
+        console.log("✅ Contact saved to Sanity.");
         setLoading(false);
         setIsFormSubmitted(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("❌ Failed to save contact to Sanity:", err);
+        alert("Failed to send message. Please check console.");
+        setLoading(false);
+      });
   };
 
   return (
@@ -45,7 +55,7 @@ const Footer = () => {
       <h2 className="head-text">Coffee's Brewing, Let's Talk.</h2>
 
       <div className="app__footer-cards">
-        <div className="app__footer-card ">
+        <div className="app__footer-card">
           <img src={images.email} alt="email" />
           <a href="mailto:alwinabymathew@gmail.com" className="p-text">
             alwinabymathew@gmail.com
@@ -58,6 +68,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
+
       {!isFormSubmitted ? (
         <div className="app__footer-form app__flex">
           <div className="app__flex">
@@ -65,8 +76,8 @@ const Footer = () => {
               className="p-text"
               type="text"
               placeholder="Your Name"
-              name="username"
-              value={username}
+              name="name"
+              value={name}
               onChange={handleChangeInput}
             />
           </div>
@@ -84,8 +95,8 @@ const Footer = () => {
             <textarea
               className="p-text"
               placeholder="Your Message"
-              value={message}
               name="message"
+              value={message}
               onChange={handleChangeInput}
             />
           </div>
